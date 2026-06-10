@@ -3,14 +3,16 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
-  Heart, Target, Lightbulb, PenLine,
-  GitBranch, LayoutGrid, Palette, Smartphone, FlaskConical,
-  User, AlertCircle, TrendingUp, HelpCircle,
+  Lightbulb, PenLine, GitBranch, LayoutGrid,
+  Palette, Smartphone, FlaskConical,
+  User, AlertCircle, TrendingUp, HelpCircle, CheckCircle, Target,
 } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const BASE = 'https://www.figma.com/embed?embed_host=share&url='
+
+const EMPATHIZE_FIGMA_URL = BASE + encodeURIComponent('https://www.figma.com/file/YOUR_FILE_ID/page=Empathize')
 
 const personas = [
   {
@@ -18,27 +20,9 @@ const personas = [
     age: '19 Tahun',
     status: 'Mahasiswa',
     color: '#00C853',
-    attributes: [
-      'Mahasiswa dengan mobilitas tinggi',
-      'Sering berpindah tempat',
-      'Bergantung pada ojek online',
-      'Mengutamakan efisiensi waktu',
-      'Terbiasa dengan teknologi digital',
-    ],
-    needs: [
-      'Transportasi cepat dan mudah diakses',
-      'Ketersediaan driver setiap saat',
-      'Ketepatan waktu perjalanan',
-      'Harga yang terjangkau',
-      'Keamanan perjalanan',
-    ],
-    challenges: [
-      'Sulit mendapatkan driver saat jam sibuk',
-      'Pembatalan pesanan oleh driver',
-      'Waktu tunggu lama',
-      'GPS kurang akurat',
-      'Estimasi waktu tidak sesuai',
-    ],
+    attributes: ['Mahasiswa dengan mobilitas tinggi', 'Sering berpindah tempat', 'Bergantung pada ojek online', 'Mengutamakan efisiensi waktu', 'Terbiasa dengan teknologi digital'],
+    needs: ['Transportasi cepat dan mudah diakses', 'Ketersediaan driver setiap saat', 'Ketepatan waktu perjalanan', 'Harga yang terjangkau', 'Keamanan perjalanan', 'Aplikasi yang sederhana'],
+    challenges: ['Sulit mendapatkan driver saat jam sibuk', 'Pembatalan pesanan oleh driver', 'Waktu tunggu lama', 'GPS kurang akurat', 'Estimasi waktu tidak sesuai', 'Harga naik tiba-tiba'],
     bio: 'Aulia adalah mahasiswa aktif yang memiliki banyak aktivitas harian sehingga membutuhkan transportasi yang cepat dan praktis. Ia sering menggunakan ojek online saat tidak membawa kendaraan pribadi dan mengandalkan layanan tersebut untuk mendukung mobilitasnya.',
   },
   {
@@ -46,52 +30,19 @@ const personas = [
     age: '15 Tahun',
     status: 'Pelajar SMP',
     color: '#7c3aed',
-    attributes: [
-      'Pelajar dengan mobilitas rutin (sekolah dan les)',
-      'Mengutamakan kepraktisan dan kecepatan waktu',
-      'Bergantung pada layanan ojek online',
-      'Terbiasa menggunakan aplikasi digital',
-    ],
-    needs: [
-      'Ketersediaan driver setiap saat, terutama di jam sibuk',
-      'Harga ongkos yang terjangkau',
-      'Keamanan dan kenyamanan perjalanan',
-      'Pelayanan driver yang profesional dan sopan',
-      'Transportasi yang bisa diandalkan untuk datang tepat waktu',
-    ],
-    challenges: [
-      'Sulit mendapatkan driver saat jam sibuk',
-      'Waktu tunggu lebih lama saat hujan',
-      'Harga ongkos tiba-tiba melonjak saat jam sibuk',
-      'Pesanan sering dibatalkan sepihak oleh driver',
-    ],
-    bio: 'Chinta adalah siswi SMP yang aktif dengan rutinitas sekolah dan tempat les. Ia sangat membutuhkan transportasi yang cepat dan praktis untuk menembus kemacetan. Ia rutin menggunakan Gojek dan menjadikannya solusi andalan untuk mobilitas harian, terutama saat tidak ada jemputan.',
+    attributes: ['Pelajar dengan mobilitas rutin (sekolah dan les)', 'Mengutamakan kepraktisan dan kecepatan waktu', 'Bergantung pada layanan ojek online', 'Terbiasa menggunakan aplikasi digital'],
+    needs: ['Ketersediaan driver setiap saat, terutama jam sibuk', 'Harga ongkos yang terjangkau', 'Keamanan dan kenyamanan perjalanan', 'Pelayanan driver yang profesional dan sopan', 'Transportasi andal untuk datang tepat waktu'],
+    challenges: ['Sulit mendapatkan driver saat jam sibuk', 'Waktu tunggu lebih lama saat hujan', 'Harga ongkos melonjak saat jam sibuk', 'Pesanan sering dibatalkan sepihak oleh driver'],
+    bio: 'Chinta adalah siswi SMP yang aktif dengan rutinitas sekolah dan tempat les. Ia sangat membutuhkan transportasi cepat dan praktis untuk menembus kemacetan. Ia rutin menggunakan Gojek dan menjadikannya solusi andalan untuk mobilitas harian, terutama saat tidak ada jemputan.',
   },
   {
     name: 'Handoko Wahyu Riadi',
     age: '55 Tahun',
     status: 'Guru Les Mewarnai',
     color: '#f97316',
-    attributes: [
-      'Guru les mewarnai dengan mobilitas tinggi',
-      'Sering berpindah tempat untuk mengajar',
-      'Menggunakan ojek pangkalan',
-      'Mengutamakan kemudahan penggunaan',
-      'Mengutamakan tepat waktu',
-    ],
-    needs: [
-      'Aplikasi yang mudah dipahami',
-      'Kepastian tarif di awal',
-      'Ketersediaan driver setiap saat',
-      'Layanan cepat tanggap untuk kondisi darurat',
-      'Transportasi yang andal dan tepat waktu',
-    ],
-    challenges: [
-      'Kesulitan menggunakan aplikasi',
-      'Jarang menggunakan layanan transportasi online',
-      'Waktu tunggu lama',
-      'Keterlambatan dalam mengajar',
-    ],
+    attributes: ['Guru les mewarnai dengan mobilitas tinggi', 'Sering berpindah tempat untuk mengajar', 'Biasa menggunakan ojek pangkalan', 'Mengutamakan kemudahan penggunaan', 'Mengutamakan tepat waktu'],
+    needs: ['Aplikasi yang mudah dipahami', 'Kepastian tarif di awal', 'Ketersediaan driver setiap saat', 'Layanan cepat tanggap untuk kondisi darurat', 'Transportasi yang andal dan tepat waktu'],
+    challenges: ['Kesulitan menggunakan aplikasi', 'Jarang menggunakan transportasi online', 'Waktu tunggu lama', 'Keterlambatan dalam mengajar'],
     bio: 'Bapak Handoko adalah seorang guru les mewarnai yang mempunyai mobilitas tinggi karena harus mengajar dari satu tempat ke tempat lain. Beliau tidak familiar dengan layanan transportasi online sehingga hanya menggunakan ojek pangkalan.',
   },
 ]
@@ -100,76 +51,45 @@ const observations = [
   {
     persona: 'Aulia Raya',
     color: '#00C853',
-    items: [
-      'User menggunakan ojek online untuk pergi ke kampus/sekolah',
-      'User mengalami pembatalan pesanan tanpa alasan yang jelas',
-      'User merasa GPS kurang akurat',
-      'User mengalami kendala harga ongkos yang tiba-tiba menjadi mahal',
-      'User menyukai layanan yang tepat waktu',
-      'User mempertimbangkan efisiensi biaya dalam memilih transportasi',
-    ],
-    opportunities: [
-      'Fitur mudah dijangkau dan dimengerti',
-      'Shortcut untuk mempercepat proses',
-      'Tampilan yang sederhana',
-      'Pemberian promo khusus pengguna aktif',
-    ],
+    items: ['User menggunakan ojek online untuk pergi ke kampus', 'User mengalami pembatalan pesanan tanpa alasan yang jelas', 'User merasa GPS kurang akurat', 'User mengalami lonjakan harga yang tiba-tiba', 'User menyukai layanan yang tepat waktu', 'User mempertimbangkan efisiensi biaya dalam memilih transportasi', 'User menggunakan Gojek karena praktis'],
+    opportunities: ['Fitur mudah dijangkau dan dimengerti', 'Shortcut untuk mempercepat proses pemesanan', 'Tampilan yang sederhana dan intuitif', 'Pemberian promo khusus pengguna aktif'],
   },
   {
     persona: 'Chinta Az-Zahra Saleha',
     color: '#7c3aed',
-    items: [
-      'User menggunakan Gojek karena praktis',
-      'User menggunakan saat tidak membawa kendaraan pribadi',
-      'User harus menunggu driver lebih lama saat turun hujan atau jam pulang sekolah',
-      'User berharap Gojek tidak menaikkan harga terlalu mahal saat jam sibuk',
-      'User membutuhkan keamanan selama perjalanan',
-    ],
-    opportunities: [
-      'Memperbanyak driver di area sekitar sekolah',
-      'Penyesuaian sistem tarif agar tidak lonjak saat jam sibuk',
-      'Penyederhanaan tampilan aplikasi',
-      'Meningkatkan standar pelayanan driver',
-    ],
+    items: ['User menggunakan saat tidak membawa kendaraan pribadi', 'User harus menunggu lebih lama saat hujan atau jam pulang sekolah', 'User berharap harga tidak naik terlalu mahal saat jam sibuk', 'User membutuhkan keamanan selama perjalanan', 'User menggunakan fitur share ride untuk keamanan'],
+    opportunities: ['Memperbanyak driver di area sekitar sekolah', 'Penyesuaian tarif agar tidak lonjak di jam sibuk', 'Penyederhanaan tampilan aplikasi', 'Meningkatkan standar pelayanan driver'],
   },
   {
     persona: 'Handoko Wahyu Riadi',
     color: '#f97316',
-    items: [
-      'User menggunakan ojek online saat ada kegiatan mendesak',
-      'User cenderung menghindari sistem yang rumit',
-      'User menginginkan voucher untuk pelanggan',
-      'User merasa aman menggunakan Gojek karena ada fitur pelacakan perjalanan',
-      'User mengutamakan kecepatan dalam berpindah tempat',
-    ],
-    opportunities: [
-      'Fitur aplikasi yang mudah digunakan',
-      'Perbaikan sistem GPS dan estimasi waktu',
-      'Sistem untuk meminimalisir pembatalan pesanan',
-      'Pemberian promo khusus pengguna aktif',
-    ],
+    items: ['User menggunakan ojek online saat ada kegiatan mendesak', 'User cenderung menghindari sistem yang rumit', 'User menginginkan voucher untuk pelanggan', 'User merasa aman dengan fitur pelacakan perjalanan', 'User mengutamakan kecepatan dalam berpindah tempat'],
+    opportunities: ['Fitur aplikasi yang mudah digunakan semua kalangan', 'Perbaikan sistem GPS dan estimasi waktu', 'Sistem meminimalisir pembatalan pesanan', 'Distribusi driver otomatis ke area dengan permintaan tinggi'],
   },
 ]
 
-const insights = [
+const insightHighItems = [
+  'User kesulitan mendapatkan driver pada jam sibuk',
+  'User menginginkan peningkatan akurasi estimasi waktu',
+  'User sangat sensitif terhadap lonjakan tarif di jam sibuk',
+  'User mementingkan keamanan dan kenyamanan perjalanan',
+]
+
+const povStatements = [
   {
-    category: 'HIGH Impact',
-    color: '#ef4444',
-    items: [
-      'User kesulitan mendapatkan driver pada jam sibuk',
-      'User menginginkan peningkatan akurasi waktu',
-      'User menyukai tarif harga yang sesuai',
-      'User mementingkan keamanan perjalanan',
-    ],
+    persona: 'Aulia Raya',
+    color: '#00C853',
+    pov: 'Aulia, seorang mahasiswa aktif yang bergantung pada ojek online, membutuhkan layanan transportasi yang dapat diandalkan kapan saja, karena ia sering mengalami pembatalan mendadak dan keterlambatan yang mengganggu aktivitasnya.',
   },
   {
-    category: 'MED Impact',
+    persona: 'Chinta Az-Zahra Saleha',
+    color: '#7c3aed',
+    pov: 'Chinta, pelajar SMP yang rutin menggunakan ojek online untuk sekolah dan les, membutuhkan tarif yang stabil dan ketersediaan driver yang konsisten, karena lonjakan harga dan sulitnya mendapat driver membuatnya sering terlambat.',
+  },
+  {
+    persona: 'Handoko Wahyu Riadi',
     color: '#f97316',
-    items: [
-      'User menggunakan ojek online untuk pergi ke kampus/sekolah',
-      'User menginginkan tampilan aplikasi yang sederhana',
-      'User menginginkan adanya promo khusus bagi pengguna aktif',
-    ],
+    pov: 'Pak Handoko, guru les dengan mobilitas tinggi yang tidak familiar dengan teknologi, membutuhkan aplikasi yang sangat sederhana dan intuitif, karena tampilan yang rumit membuatnya lebih memilih ojek pangkalan meski kurang praktis.',
   },
 ]
 
@@ -177,14 +97,14 @@ const howMightWe = [
   {
     question: 'Bagaimana kita memberikan kepastian waktu perjalanan yang akurat agar pengguna dapat merencanakan aktivitasnya tanpa risiko keterlambatan?',
     solutions: [
-      'Menambahkan fitur "Driver Availability Indicator" yang menampilkan jumlah driver aktif di sekitar lokasi user',
-      'Tampilkan estimasi waktu dalam bentuk rentang untuk meningkatkan akurasi persepsi pengguna',
-      'Prioritaskan driver dengan riwayat performa tinggi pada area dan waktu dengan permintaan tinggi',
-      'Menerapkan "Auto Suggestion Berdasarkan Kebiasaan" berdasarkan waktu dan pola aktivitas user',
+      '"Driver Availability Indicator" — tampilkan jumlah driver aktif di sekitar lokasi user secara real-time',
+      'Estimasi waktu dalam bentuk rentang (mis. 5–8 menit) untuk meningkatkan akurasi persepsi pengguna',
+      'Prioritaskan driver dengan riwayat performa tinggi pada area dan waktu permintaan tinggi',
+      '"Auto Suggestion Berdasarkan Kebiasaan" — saran otomatis berdasarkan waktu dan pola aktivitas user',
     ],
   },
   {
-    question: 'Bagaimana kita mengurangi pembatalan pesanan yang merugikan pengguna?',
+    question: 'Bagaimana kita mengurangi dampak pembatalan pesanan yang merugikan pengguna?',
     solutions: [
       'Alihkan pesanan secara otomatis ke driver terdekat jika terjadi pembatalan tanpa mengganggu alur penggunaan',
       'Sistem distribusi driver di area rawan macet dengan potensi permintaan tinggi',
@@ -193,98 +113,70 @@ const howMightWe = [
     ],
   },
   {
-    question: 'Bagaimana kita membuat tampilan aplikasi lebih mudah dipahami untuk semua kalangan?',
+    question: 'Bagaimana kita membuat tampilan aplikasi lebih mudah dipahami untuk semua kalangan termasuk non-tech savvy?',
     solutions: [
-      'Gunakan alur pemesanan yang lebih ringkas',
-      'Berikan informasi kondisi lalu lintas dan potensi keterlambatan sebelum pemesanan',
-      'Tampilan sederhana dengan shortcut untuk mempercepat proses',
-      'Label dan ikon yang mudah dipahami oleh semua segmen pengguna',
+      'Gunakan alur pemesanan yang lebih ringkas dengan lebih sedikit langkah (klik)',
+      'Tampilkan informasi kondisi lalu lintas dan potensi keterlambatan sebelum pemesanan',
+      'Shortcut 3-button untuk layanan yang paling sering digunakan',
+      'Label dan ikon yang universal, mudah dipahami oleh semua segmen usia',
     ],
   },
 ]
 
-const mainProblem = 'User bergantung pada ojek online sebagai solusi mobilitas cepat, namun menghadapi hambatan serius berupa sulitnya mendapatkan driver saat jam sibuk, pembatalan mendadak, akurasi GPS yang rendah, dan lonjakan tarif yang tidak terduga — sehingga kepercayaan dan kenyamanan pengguna terhadap layanan menurun.'
-
 const priorityMatrix = [
   { label: 'Driver Availability Indicator', impact: 'HIGH', effort: 'MED', color: '#ef4444' },
-  { label: 'Auto-assign saat pembatalan', impact: 'HIGH', effort: 'LOW', color: '#ef4444' },
-  { label: 'Estimasi waktu dinamis', impact: 'HIGH', effort: 'MED', color: '#ef4444' },
-  { label: 'Penyederhanaan UI/alur pesan', impact: 'HIGH', effort: 'LOW', color: '#00C853' },
+  { label: 'Auto-assign saat driver batal', impact: 'HIGH', effort: 'LOW', color: '#ef4444' },
+  { label: 'Estimasi waktu dinamis & akurat', impact: 'HIGH', effort: 'MED', color: '#ef4444' },
+  { label: 'Penyederhanaan UI & alur pesan', impact: 'HIGH', effort: 'LOW', color: '#00C853' },
   { label: 'Promo & voucher pengguna aktif', impact: 'MED', effort: 'LOW', color: '#f97316' },
-  { label: 'Titik jemput alternatif', impact: 'MED', effort: 'MED', color: '#f97316' },
+  { label: 'Titik jemput alternatif otomatis', impact: 'MED', effort: 'MED', color: '#f97316' },
+  { label: 'Transparansi tarif sebelum pesan', impact: 'HIGH', effort: 'LOW', color: '#ef4444' },
+  { label: 'Notifikasi kondisi lalu lintas', impact: 'MED', effort: 'MED', color: '#f97316' },
 ]
 
 const ideateSteps = [
   {
-    id: 'ideate',
-    icon: Lightbulb,
-    color: '#eab308',
-    label: '03',
-    title: "Ideate: Crazy 8's & Brainstorming",
+    id: 'ideate', icon: Lightbulb, color: '#eab308', label: '3.1',
+    title: "Crazy 8's & Brainstorming",
     description: "Menghasilkan berbagai solusi kreatif melalui metode Crazy 8's dan sesi brainstorming tim. Dipilih solusi terbaik yang paling feasible dan impactful.",
     figmaUrl: BASE + encodeURIComponent('https://www.figma.com/file/YOUR_FILE_ID/page=Ideate'),
     hasEmbed: true,
   },
   {
-    id: 'lofi',
-    icon: PenLine,
-    color: '#8b5cf6',
-    label: '04',
+    id: 'lofi', icon: PenLine, color: '#8b5cf6', label: '3.2',
     title: 'Low-Fidelity Sketches',
     description: 'Menuangkan ide ke dalam sketsa kasar (lo-fi) untuk memvisualisasikan layout dan alur navigasi sebelum masuk ke tahap desain digital.',
     figmaUrl: BASE + encodeURIComponent('https://www.figma.com/file/YOUR_FILE_ID/page=LoFi'),
     hasEmbed: true,
   },
   {
-    id: 'userflow',
-    icon: GitBranch,
-    color: '#06b6d4',
-    label: '05',
+    id: 'userflow', icon: GitBranch, color: '#06b6d4', label: '3.3',
     title: 'User Flow',
-    description: 'Memetakan alur lengkap perjalanan pengguna dari onboarding hingga menemukan teman perjalanan, memastikan pengalaman yang intuitif dan efisien.',
+    description: 'Memetakan alur lengkap perjalanan pengguna dari onboarding hingga pemesanan, memastikan pengalaman yang intuitif dan efisien.',
     figmaUrl: BASE + encodeURIComponent('https://www.figma.com/file/YOUR_FILE_ID/page=UserFlow'),
     hasEmbed: true,
   },
   {
-    id: 'ia',
-    icon: LayoutGrid,
-    color: '#10b981',
-    label: '06',
+    id: 'ia', icon: LayoutGrid, color: '#10b981', label: '3.4',
     title: 'Information Architecture',
-    description: 'Menyusun struktur informasi dan navigasi aplikasi menggunakan sitemap dan card sorting untuk memastikan konten mudah ditemukan oleh pengguna.',
+    description: 'Menyusun struktur informasi dan navigasi aplikasi menggunakan sitemap dan card sorting untuk memastikan konten mudah ditemukan pengguna.',
     figmaUrl: BASE + encodeURIComponent('https://www.figma.com/file/YOUR_FILE_ID/page=IA'),
     hasEmbed: true,
   },
   {
-    id: 'uikit',
-    icon: Palette,
-    color: '#00C853',
-    label: '07',
+    id: 'uikit', icon: Palette, color: '#00C853', label: '3.5',
     title: 'UI Kit & Design System',
     description: 'Membangun design system lengkap: color palette, typography scale, component library, dan design tokens untuk konsistensi visual di seluruh aplikasi.',
     figmaUrl: BASE + encodeURIComponent('https://www.figma.com/file/YOUR_FILE_ID/page=UIKit'),
     hasEmbed: true,
   },
   {
-    id: 'prototype',
-    icon: Smartphone,
-    color: '#00C853',
-    label: '08',
+    id: 'prototype', icon: Smartphone, color: '#00C853', label: '3.6',
     title: 'Prototype',
     description: 'High-fidelity interactive prototype yang menampilkan pengalaman pengguna secara nyata. Klik dan navigasikan langsung di bawah ini!',
-    figmaUrl: BASE + encodeURIComponent('https://www.figma.com/proto/YOUR_FILE_ID'),
+    figmaUrl: BASE + encodeURIComponent('https://www.figma.com/proto/Gnz6Qf3CSmbYVizRJR2cCC/Desain-Prototype?node-id=13-6&p=f&t=7aiHxYyyYotV711o-1&scaling=scale-down&content-scaling=responsive&page-id=0%3A1&starting-point-node-id=13%3A6'),
     hasEmbed: true,
     isPrototype: true,
-  },
-  {
-    id: 'test',
-    icon: FlaskConical,
-    color: '#6366f1',
-    label: '09',
-    title: 'Test & Iteration',
-    description: 'Melakukan usability testing dengan 5 pengguna representatif. Mengidentifikasi pain points, mengumpulkan feedback, dan melakukan iterasi desain berdasarkan temuan.',
-    figmaUrl: null,
-    hasEmbed: false,
   },
 ]
 
@@ -321,17 +213,18 @@ function FigmaEmbed({ url, title, isPrototype }) {
   )
 }
 
-function SectionHeading({ badge, title, highlight, subtitle }) {
+function StepHeading({ badge, stepNum, title, highlight, subtitle }) {
   return (
-    <div className="text-center mb-12">
+    <div className="text-center mb-14">
       <span className="section-badge mb-4 inline-flex">{badge}</span>
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-4 mb-4">
-        {title}{' '}
+        {stepNum}{' '}
         <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #00C853, #00e676)' }}>
           {highlight}
         </span>
+        {title && <span className="block text-2xl md:text-3xl text-gray-600 font-semibold mt-1">{title}</span>}
       </h2>
-      {subtitle && <p className="text-gray-500 text-lg max-w-2xl mx-auto">{subtitle}</p>}
+      {subtitle && <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
     </div>
   )
 }
@@ -339,6 +232,8 @@ function SectionHeading({ badge, title, highlight, subtitle }) {
 export default function ProcessSection() {
   const sectionRef = useRef(null)
   const itemsRef = useRef([])
+  const insightCardsRef = useRef([])
+  let refIdx = 0
 
   useGSAP(() => {
     itemsRef.current.forEach((item) => {
@@ -349,228 +244,181 @@ export default function ProcessSection() {
         scrollTrigger: { trigger: item, start: 'top 85%', toggleActions: 'play none none reverse' },
       })
     })
+
+    insightCardsRef.current.forEach((card, i) => {
+      if (!card) return
+      gsap.set(card, { opacity: 0, y: 30 })
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: 0.5, delay: i * 0.08, ease: 'power3.out',
+        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none reverse' },
+      })
+    })
   }, { scope: sectionRef })
 
-  let refIdx = 0
-  const getRef = (el) => { itemsRef.current[refIdx++] = el }
+  const r = (el) => { itemsRef.current[refIdx++] = el }
 
   return (
     <div ref={sectionRef}>
 
-      {/* ===================== EMPATHIZE ===================== */}
+      {/* ===== EMPATHIZE ===== */}
       <section id="empathize" className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-80 h-80 bg-green-50 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-50 pointer-events-none" />
-        <div className="max-w-6xl mx-auto px-6">
-          <div ref={getRef}>
-            <SectionHeading
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-green-50 rounded-full opacity-60 pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-green-50 rounded-full opacity-40 pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-6">
+
+          <div ref={r}>
+            <StepHeading
               badge="✦ Step 01"
-              title="1."
-              highlight="Empathize"
-              subtitle="Memahami kebutuhan, frustrasi, dan perilaku pengguna ojek online melalui user persona, observasi, dan insight mendalam."
+              stepNum="Empathize"
+              highlight=""
+              subtitle="Kami melakukan riset mendalam untuk memahami kebutuhan nyata pengguna ojek online — dari mahasiswa aktif, pelajar, hingga pengguna non-tech savvy — guna menemukan pain points yang sesungguhnya."
             />
           </div>
 
-          <div ref={getRef} className="mb-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Metodologi Riset</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {[
-                { icon: '🎤', label: 'Wawancara', desc: 'Wawancara kualitatif terhadap 3 pengguna aktif transportasi online' },
-                { icon: '👁️', label: 'Observasi', desc: 'Mengamati langsung penggunaan aplikasi ojek online di lapangan' },
-                { icon: '📋', label: 'Kuesioner', desc: 'Validasi masalah secara kuantitatif untuk konfirmasi temuan' },
-              ].map((m) => (
-                <div key={m.label} className="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex gap-4 items-start">
-                  <span className="text-2xl">{m.icon}</span>
-                  <div>
-                    <div className="font-bold text-gray-800 mb-1">{m.label}</div>
-                    <div className="text-sm text-gray-500">{m.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div ref={r}>
+            <FigmaEmbed url={EMPATHIZE_FIGMA_URL} title="Empathize — User Persona, Observation & Insight" />
           </div>
 
-          <div ref={getRef} className="mb-4">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">User Persona</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {personas.map((p) => (
-                <div key={p.name} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
-                  <div className="h-2" style={{ background: p.color }} />
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center text-white flex-shrink-0" style={{ background: p.color }}>
-                        <User size={22} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-gray-900">{p.name}</div>
-                        <div className="text-sm text-gray-500">{p.age} · {p.status}</div>
-                      </div>
-                    </div>
-                    <p className="text-sm text-gray-500 leading-relaxed mb-4">{p.bio}</p>
-                    <div className="mb-3">
-                      <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Key Attributes</div>
-                      <ul className="space-y-1">
-                        {p.attributes.map((a) => (
-                          <li key={a} className="text-sm text-gray-600 flex gap-2 items-start">
-                            <span className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: p.color }} />
-                            {a}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3 mt-4">
-                      <div className="bg-green-50 rounded-xl p-3">
-                        <div className="text-xs font-bold text-green-700 mb-2 flex items-center gap-1">
-                          <TrendingUp size={12} /> Needs
+          {/* Metodologi Riset + Key Insights */}
+          <div ref={r} className="mt-12">
+            <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+              {/* Kiri: Metodologi Riset */}
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="bg-white p-8 border-b md:border-b-0 md:border-r border-gray-100">
+                  <div className="flex items-center gap-2 mb-5">
+                    <div className="w-1 h-5 rounded-full" style={{ background: '#00C853' }} />
+                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Metodologi Riset</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    {[
+                      { num: '01', label: 'Wawancara Kualitatif', desc: 'Wawancara mendalam terhadap 3 pengguna aktif — mahasiswa, pelajar SMP, dan guru.' },
+                      { num: '02', label: 'Observasi Langsung', desc: 'Mengamati langsung interaksi pengguna dengan aplikasi ojek online.' },
+                      { num: '03', label: 'Kuesioner', desc: 'Validasi temuan secara kuantitatif untuk konfirmasi masalah yang ditemukan.' },
+                    ].map((m) => (
+                      <li key={m.label} className="flex gap-3 items-start group">
+                        <span className="text-xs font-black flex-shrink-0 mt-0.5 w-5" style={{ color: '#00C85355' }}>{m.num}</span>
+                        <div>
+                          <div className="font-semibold text-gray-800 text-sm group-hover:text-green-600 transition-colors duration-200">{m.label}</div>
+                          <div className="text-xs text-gray-400 leading-relaxed mt-0.5">{m.desc}</div>
                         </div>
-                        <ul className="space-y-1">
-                          {p.needs.map((n) => (
-                            <li key={n} className="text-xs text-gray-600">• {n}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="bg-red-50 rounded-xl p-3">
-                        <div className="text-xs font-bold text-red-600 mb-2 flex items-center gap-1">
-                          <AlertCircle size={12} /> Challenges
-                        </div>
-                        <ul className="space-y-1">
-                          {p.challenges.map((c) => (
-                            <li key={c} className="text-xs text-gray-600">• {c}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div ref={getRef} className="mt-12">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Observation & Opportunities</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {observations.map((obs) => (
-                <div key={obs.persona} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
-                  <div className="px-5 pt-5 pb-3 border-b border-gray-50">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: obs.color }} />
-                      <span className="font-bold text-gray-800 text-sm">{obs.persona}</span>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <div className="mb-4">
-                      <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Observations</div>
-                      <ul className="space-y-1.5">
-                        {obs.items.map((item) => (
-                          <li key={item} className="text-sm text-gray-600 flex gap-2 items-start">
-                            <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gray-300" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: obs.color }}>Opportunities</div>
-                      <ul className="space-y-1.5">
-                        {obs.opportunities.map((opp) => (
-                          <li key={opp} className="text-sm text-gray-600 flex gap-2 items-start">
-                            <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: obs.color }} />
-                            {opp}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div ref={getRef} className="mt-12">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Key Insights</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {insights.map((ins) => (
-                <div key={ins.category} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-white text-xs font-bold mb-4" style={{ background: ins.color }}>
-                    {ins.category}
-                  </div>
-                  <ul className="space-y-2">
-                    {ins.items.map((item) => (
-                      <li key={item} className="text-sm text-gray-700 flex gap-2 items-start">
-                        <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: ins.color }} />
-                        {item}
                       </li>
                     ))}
                   </ul>
                 </div>
-              ))}
+
+                <div className="bg-gray-50 p-7">
+                  <div className="flex items-center gap-2 mb-5">
+                    <div className="w-1 h-5 rounded-full bg-red-400" />
+                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Key Insights</h3>
+                  </div>
+                  <ul className="space-y-2.5">
+                    {[
+                      { label: 'Sulit Mendapat Driver', desc: 'Kesulitan di jam sibuk, pagi hari, dan saat hujan.', tagColor: '#ef4444', tagBg: '#fef2f2', tag: 'HIGH' },
+                      { label: 'Akurasi Waktu Rendah', desc: 'Estimasi waktu sering tidak sesuai kenyataan.', tagColor: '#ef4444', tagBg: '#fef2f2', tag: 'HIGH' },
+                      { label: 'Lonjakan Tarif', desc: 'Harga naik tiba-tiba di jam sibuk membuat pengguna ragu.', tagColor: '#ef4444', tagBg: '#fef2f2', tag: 'HIGH' },
+                      { label: 'Keamanan Prioritas', desc: 'Fitur share ride jadi alasan utama tetap pakai Gojek.', tagColor: '#ef4444', tagBg: '#fef2f2', tag: 'HIGH' },
+                      { label: 'UI yang Sederhana', desc: 'Pengguna non-tech savvy butuh tampilan lebih intuitif.', tagColor: '#f97316', tagBg: '#fff7ed', tag: 'MED' },
+                      { label: 'Promo & Voucher', desc: 'Pengguna aktif mengharapkan reward dan promo khusus.', tagColor: '#f97316', tagBg: '#fff7ed', tag: 'MED' },
+                    ].map((ins, i) => (
+                      <li
+                        key={ins.label}
+                        ref={(el) => (insightCardsRef.current[i] = el)}
+                        className="flex gap-2.5 items-center bg-white rounded-xl px-3 py-2.5 border border-gray-100 hover:shadow-sm transition-shadow duration-200"
+                      >
+                        <span className="flex-shrink-0 text-xs font-bold px-2 py-0.5 rounded-full" style={{ color: ins.tagColor, background: ins.tagBg }}>
+                          {ins.tag}
+                        </span>
+                        <div className="min-w-0">
+                          <span className="font-semibold text-xs" style={{ color: ins.tagColor }}>{ins.label}</span>
+                          <span className="text-xs text-gray-400"> — {ins.desc}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* ===================== DEFINE ===================== */}
-      <section id="define" className="py-24 relative overflow-hidden" style={{ background: '#f9fafb' }}>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-green-50 rounded-full translate-x-1/2 translate-y-1/2 opacity-40 pointer-events-none" />
-        <div className="max-w-6xl mx-auto px-6">
-          <div ref={getRef}>
-            <SectionHeading
+      {/* ===== DEFINE ===== */}
+      <section id="define" className="py-20 relative overflow-hidden" style={{ background: '#f9fafb' }}>
+        <div className="absolute top-0 right-0 w-80 h-80 bg-green-50 rounded-full translate-x-1/2 -translate-y-1/2 opacity-40 pointer-events-none" />
+        <div className="max-w-4xl mx-auto px-6">
+          <div ref={r}>
+            <StepHeading
               badge="✦ Step 02"
-              title="2."
-              highlight="Define"
-              subtitle="Mendefinisikan problem statement berdasarkan temuan riset menggunakan Point of View (POV) dan How Might We (HMW)."
+              stepNum="Define"
+              highlight=""
+              subtitle="Mendefinisikan inti masalah berdasarkan temuan riset dan merumuskan peluang solusi melalui How Might We."
             />
           </div>
 
-          <div ref={getRef} className="mb-10">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
-                  <AlertCircle size={20} className="text-red-500" />
+          {/* Problem Statement + Prioritas side by side */}
+          <div ref={r} className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="h-1 bg-gradient-to-r from-red-500 to-red-400" />
+              <div className="p-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertCircle size={16} className="text-red-500 flex-shrink-0" />
+                  <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">Problem Statement</span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Main Problem Statement</h3>
+                <p className="text-gray-700 text-sm leading-relaxed font-medium mb-2">
+                  "User bergantung pada ojek online, namun menghadapi hambatan: sulit dapat driver, pembatalan mendadak, GPS kurang akurat, dan lonjakan tarif."
+                </p>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Ketiga persona mengalami masalah serupa — kepercayaan terhadap layanan menurun akibat pengalaman yang tidak konsisten.
+                </p>
               </div>
-              <p className="text-gray-700 leading-relaxed text-lg border-l-4 border-red-400 pl-5">
-                {mainProblem}
-              </p>
             </div>
-          </div>
 
-          <div ref={getRef} className="mb-10">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Priority Matrix</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {priorityMatrix.map((item) => (
-                <div key={item.label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex items-center gap-4">
-                  <div className="flex flex-col gap-1 flex-shrink-0">
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: item.color }}>
-                      {item.impact}
-                    </span>
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 text-center">
-                      {item.effort} effort
-                    </span>
-                  </div>
-                  <span className="text-sm font-medium text-gray-700">{item.label}</span>
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="h-1 bg-gradient-to-r from-orange-400 to-yellow-400" />
+              <div className="p-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <Target size={16} className="text-orange-500 flex-shrink-0" />
+                  <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">Prioritas Masalah</span>
                 </div>
-              ))}
+                <ul className="space-y-2">
+                  {priorityMatrix.map((item) => (
+                    <li key={item.label} className="flex items-center gap-2.5">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white flex-shrink-0 w-12 text-center" style={{ background: item.color }}>
+                        {item.impact}
+                      </span>
+                      <span className="text-xs text-gray-600">{item.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div ref={getRef}>
-            <h3 className="text-xl font-bold text-gray-800 mb-6">How Might We (HMW)</h3>
-            <div className="space-y-6">
+          {/* HMW */}
+          <div ref={r}>
+            <div className="flex items-center gap-2 mb-5">
+              <HelpCircle size={16} className="text-green-600 flex-shrink-0" />
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">How Might We (HMW)</h3>
+            </div>
+            <div className="space-y-3">
               {howMightWe.map((hmw, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                  <div className="px-6 py-4 border-b border-gray-50 flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <HelpCircle size={16} className="text-green-600" />
+                <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                  <div className="px-5 py-4 border-b border-gray-50">
+                    <div className="flex gap-3 items-start">
+                      <span className="text-xs font-bold text-green-600 flex-shrink-0 mt-0.5">#{i + 1}</span>
+                      <p className="font-medium text-gray-800 text-sm leading-relaxed">{hmw.question}</p>
                     </div>
-                    <p className="font-semibold text-gray-800">{hmw.question}</p>
                   </div>
-                  <div className="px-6 py-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="px-5 py-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {hmw.solutions.map((sol, j) => (
                         <div key={j} className="flex gap-2 items-start">
-                          <span className="mt-1 text-green-500 font-bold flex-shrink-0">→</span>
-                          <span className="text-sm text-gray-600">{sol}</span>
+                          <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style={{ background: '#00C853' }} />
+                          <span className="text-xs text-gray-500 leading-relaxed">{sol}</span>
                         </div>
                       ))}
                     </div>
@@ -582,20 +430,19 @@ export default function ProcessSection() {
         </div>
       </section>
 
-      {/* ===================== IDEATE — UI KIT ===================== */}
+      {/* ===== IDEATE — TEST ===== */}
       <section id="proses" className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6">
-          <div ref={getRef} className="text-center mb-16">
-            <span className="section-badge mb-4 inline-flex">✦ Design Thinking</span>
+          <div ref={r} className="text-center mb-16">
+            <span className="section-badge mb-4 inline-flex">✦ Design Process</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-4 mb-4">
-              Proses{' '}
+              Dari Ide ke{' '}
               <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #00C853, #00e676)' }}>
-                Desain
-              </span>{' '}
-              Kami
+                Prototype
+              </span>
             </h2>
             <p className="text-gray-500 text-lg max-w-xl mx-auto">
-              Dari ideasi hingga prototype, setiap tahap dirancang untuk menghasilkan solusi yang berpusat pada pengguna.
+              Setiap tahap dirancang secara iteratif untuk menghasilkan solusi yang benar-benar menjawab kebutuhan pengguna.
             </p>
           </div>
 
@@ -608,7 +455,7 @@ export default function ProcessSection() {
                 <div
                   key={step.id}
                   id={isPrototype ? 'prototype' : step.id === 'test' ? 'test' : step.id}
-                  ref={getRef}
+                  ref={r}
                   className="flex gap-5 md:gap-6"
                 >
                   <div className="flex flex-col items-center flex-shrink-0" style={{ width: 48 }}>
@@ -641,6 +488,172 @@ export default function ProcessSection() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ===== TESTING ===== */}
+      <section id="test" className="py-24 relative overflow-hidden" style={{ background: '#f9fafb' }}>
+        <div className="absolute top-0 left-0 w-80 h-80 bg-indigo-50 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-40 pointer-events-none" />
+        <div className="max-w-4xl mx-auto px-6">
+
+          <div ref={r}>
+            <StepHeading
+              badge="✦ Step 04"
+              stepNum="Testing"
+              highlight=""
+              subtitle="Melakukan usability testing dengan pengguna representatif untuk mengidentifikasi pain points, mengumpulkan feedback, dan melakukan iterasi desain."
+            />
+          </div>
+
+          {/* Metode Testing */}
+          <div ref={r} className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-5 rounded-full bg-indigo-400" />
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Metode Testing</h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { num: '01', label: 'Qualitative Testing', desc: 'Pengujian berbasis tugas untuk mengamati perilaku pengguna secara langsung.' },
+                { num: '02', label: 'Task-based Testing', desc: 'Pengguna diminta menyelesaikan skenario nyata menggunakan prototype.' },
+                { num: '03', label: 'Wawancara Singkat', desc: 'Diskusi pasca-testing untuk menggali persepsi dan kesulitan pengguna.' },
+              ].map((m) => (
+                <div key={m.label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-shadow duration-300">
+                  <div className="text-2xl font-black mb-2 leading-none" style={{ color: '#6366f118' }}>{m.num}</div>
+                  <div className="font-semibold text-gray-800 text-sm mb-1">{m.label}</div>
+                  <div className="text-xs text-gray-400 leading-relaxed">{m.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Penguji — grid 2 kolom foto */}
+          <div ref={r} className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-5 rounded-full bg-indigo-400" />
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Penguji</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { name: 'Penguji 1', role: 'Mahasiswa, 19 Tahun', note: '"Alurnya cukup jelas, tapi tombol konfirmasi agak susah ditemukan."' },
+                { name: 'Penguji 2', role: 'Pelajar SMP, 15 Tahun', note: '"Tampilannya bagus, cuma harganya kurang keliatan sebelum pesan."' },
+                { name: 'Penguji 3', role: 'Guru, 45 Tahun', note: '"Mudah dipakai, navigasinya sederhana dan tidak membingungkan."' },
+                { name: 'Penguji 4', role: 'Karyawan, 28 Tahun', note: '"Estimasi waktu perlu lebih akurat, tapi secara umum sudah bagus."' },
+                { name: 'Penguji 5', role: 'Ibu Rumah Tangga, 38 Tahun', note: '"Ikon-ikonnya mudah dipahami, proses pemesanan terasa cepat."' },
+              ].map((p) => (
+                <div key={p.name} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                  <div className="aspect-video bg-gray-100 flex items-center justify-center">
+                    <div className="flex flex-col items-center gap-2 text-gray-300">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" /></svg>
+                      <span className="text-xs">Foto Penguji</span>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div className="font-bold text-gray-900 text-sm">{p.name}</div>
+                    <div className="text-xs text-gray-400 mb-2">{p.role}</div>
+                    <p className="text-xs text-gray-500 italic leading-relaxed">{p.note}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Hasil Pengujian */}
+          <div ref={r} className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-5 rounded-full bg-indigo-400" />
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Hasil Pengujian</h3>
+            </div>
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+                <div className="p-6">
+                  <div className="text-xs font-bold uppercase tracking-widest text-green-600 mb-3">✓ Berhasil</div>
+                  <ul className="space-y-2">
+                    {[
+                      'Navigasi beranda mudah dipahami semua penguji',
+                      'Alur pemesanan terasa cepat dan ringkas',
+                      'Estimasi harga tampil jelas sebelum konfirmasi',
+                      'Status driver mudah dipantau selama menunggu',
+                    ].map((item) => (
+                      <li key={item} className="flex gap-2 items-start">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-green-400" />
+                        <span className="text-sm text-gray-600">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-6">
+                  <div className="text-xs font-bold uppercase tracking-widest text-orange-500 mb-3">⚠ Perlu Perbaikan</div>
+                  <ul className="space-y-2">
+                    {[
+                      'Tombol konfirmasi kurang menonjol di beberapa layar',
+                      'Akurasi estimasi waktu perlu ditingkatkan',
+                      'Informasi tarif perlu lebih awal ditampilkan',
+                      'Notifikasi pembatalan kurang informatif',
+                    ].map((item) => (
+                      <li key={item} className="flex gap-2 items-start">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-orange-400" />
+                        <span className="text-sm text-gray-600">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Hasil Perbaikan */}
+          <div ref={r} className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-5 rounded-full bg-indigo-400" />
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Hasil Perbaikan</h3>
+            </div>
+            <div className="space-y-3">
+              {[
+                { before: 'Tombol konfirmasi kecil dan tidak menonjol', after: 'Tombol diperbesar dan diberi warna primer yang lebih kontras' },
+                { before: 'Estimasi waktu ditampilkan sebagai angka tunggal', after: 'Estimasi diubah ke bentuk rentang (mis. 5–8 menit) yang lebih realistis' },
+                { before: 'Informasi tarif baru muncul di halaman konfirmasi', after: 'Estimasi tarif ditampilkan sejak halaman pemilihan layanan' },
+                { before: 'Notifikasi pembatalan hanya teks singkat', after: 'Notifikasi dilengkapi alasan dan opsi cari driver alternatif otomatis' },
+              ].map((item, i) => (
+                <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="flex gap-2 items-start">
+                    <span className="text-xs font-bold text-red-400 flex-shrink-0 mt-0.5">Before</span>
+                    <span className="text-xs text-gray-500">{item.before}</span>
+                  </div>
+                  <div className="flex gap-2 items-start">
+                    <span className="text-xs font-bold text-green-500 flex-shrink-0 mt-0.5">After</span>
+                    <span className="text-xs text-gray-700 font-medium">{item.after}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Kesimpulan */}
+          <div ref={r}>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-5 rounded-full bg-green-500" />
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Kesimpulan</h3>
+            </div>
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="h-1" style={{ background: 'linear-gradient(90deg, #00C853, #6366f1)' }} />
+              <div className="p-6 md:p-8">
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Prototype aplikasi <strong>Teman Jalan</strong> berhasil diuji secara fungsional untuk kebutuhan dasar transportasi online. Secara keseluruhan, pengguna merasa alur pemesanan lebih ringkas dan tampilan lebih mudah dipahami dibanding aplikasi sejenis.
+                </p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                  Iterasi yang dilakukan berhasil menyelesaikan 4 dari 4 temuan utama testing — mulai dari visibilitas tombol, transparansi tarif, akurasi estimasi waktu, hingga notifikasi pembatalan yang lebih informatif. Pengembangan selanjutnya akan berfokus pada peningkatan akurasi GPS real-time dan sistem reward untuk pengguna aktif.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Alur Pemesanan Mudah', 'UI Intuitif', 'Tarif Transparan', 'Notifikasi Informatif', 'Estimasi Akurat'].map((tag) => (
+                    <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-700">
+                      ✓ {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
